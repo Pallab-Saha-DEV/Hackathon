@@ -355,26 +355,22 @@ with tab1:
     with col_left:
         st.subheader("📈 Interactive Stock Analyzer")
         
-        # Load unique stock tickers that have been scanned and analyzed in the DB
+        # Load unique stock tickers detected from Moneycontrol ingestion
         db_tickers = db.get_all_analyzed_tickers()
         
-        # Fallback to defaults if no ingestion has run yet
+        # Fallback to well-known NSE blue-chips if no ingestion has run yet
         if not db_tickers:
-            dropdown_options = ["RELIANCE", "INFY", "TCS", "Custom Ticker (Enter below)..."]
+            dropdown_options = ["RELIANCE", "INFY", "TCS", "HDFCBANK", "ICICIBANK"]
+            st.info("ℹ️ No stocks ingested yet. Showing default blue-chip tickers. Run **Trigger Daily Ingestion** in the sidebar to populate from Moneycontrol.")
         else:
-            dropdown_options = db_tickers + ["Custom Ticker (Enter below)..."]
+            dropdown_options = db_tickers
             
-        selected_option = st.selectbox(
-            "Select Stock from Fetched & Analyzed Database",
+        ticker_input = st.selectbox(
+            "Select Stock (auto-populated from Moneycontrol data)",
             options=dropdown_options,
             index=0,
-            help="This dropdown dynamically lists stock symbols that have been fetched and analyzed in your database."
+            help="Stocks are auto-detected from daily Moneycontrol RSS feeds. Run ingestion to refresh this list."
         )
-        
-        if selected_option == "Custom Ticker (Enter below)...":
-            ticker_input = st.text_input("Enter Custom Stock Symbol", value="ZOMATO", help="e.g. ZOMATO, INFIBEAM, AAPL")
-        else:
-            ticker_input = selected_option
             
         # Load stock history
         if ticker_input:

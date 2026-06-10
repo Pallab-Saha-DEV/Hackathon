@@ -1,0 +1,41 @@
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual Environments ──
+venv/
+.venv/
+env/
+.env
+ENV/
+
+# ── Secrets ──
+.env
+*.env
+!.env.template
+
+# ── Database (do NOT commit — Railway uses ephemeral filesystem) ──
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Streamlit ──
+.streamlit/secrets.toml
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDEs ──
+.vscode/
+.idea/
+*.swp
+*.swo

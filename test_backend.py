@@ -57,7 +57,6 @@ def run_tests():
         print("   (To test fully, configure the key in .env or run via the Streamlit UI Sidebar.)")
     else:
         try:
-            gemini_client.configure_gemini()
             print("   Generating test embedding using 'text-embedding-004'...")
             emb = gemini_client.get_embedding("Testing vector embedding creation.")
             print(f" [OK] Embedding generated. Vector dimension: {len(emb)}")
